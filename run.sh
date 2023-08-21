@@ -1,4 +1,5 @@
-rm insert
-gcc -g insert.c -o insert
-chmod u+x ./insert
-./insert
+rm compiled/insert
+mkdir compiled
+gcc -g insert.c -o compiled/insert
+chmod u+x ./compiled/insert
+./compiled/insert
