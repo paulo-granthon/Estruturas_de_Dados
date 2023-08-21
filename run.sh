@@ -1,5 +1,5 @@
-rm compiled/insert
+rm compiled/"$1"
 mkdir compiled
-gcc -g src/insert.c -o compiled/insert
-chmod u+x ./compiled/insert
-./compiled/insert
+gcc -g src/"$1".c -o compiled/"$1"
+chmod u+x ./compiled/"$1"
+./compiled/"$1"
