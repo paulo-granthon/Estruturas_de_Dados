@@ -7,6 +7,8 @@ Implemented a Bash script for easily compiling and running the C code without th
 * To run any of the files while on an Unix system, simply type `./run.sh X` where X is the number of the exercise to run.
 * The script identifies what file you are refering to and executes it.
 
+## Exercises located in the src/ directory:
+
 ### 0. hello_world
 Simple hello world as my first contact with the C language.
 
