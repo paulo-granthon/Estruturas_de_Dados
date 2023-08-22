@@ -6,7 +6,7 @@ static void print_recursive (int v[], int n) {
         return;
     }
     print_recursive(v, n-1);
-    printf("\nnumber [%d]: %d", n, v[n-1]);
+    printf("number [%d]: %d\n", n, v[n-1]);
 }
 
 
