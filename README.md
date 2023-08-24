@@ -2,9 +2,10 @@
 
 A library of exercises solved in C for the Data Structures class at FATEC.
 
-## `run.sh`
+## `run.sh` & `run.bat`
 Implemented a Bash script for easily compiling and running the C code without the need of tools like `make`.  
 * To run any of the files while on an Unix system, simply type `./run.sh X` where X is the number of the exercise to run.
+* To run any of the files while on a Windows system, simply type `./run.bat X` where X is the number of the exercise to run.
 * The script identifies what file you are refering to and executes it.
 
 ## Exercises located in the src/ directory:
