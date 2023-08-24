@@ -13,10 +13,13 @@ Implemented a Bash script for easily compiling and running the C code without th
 Simple hello world as my first contact with the C language.
 
 ### 1. ordered_insert
-Inserting an integer value into an array the correct position, considering the other values already in the array.
+Inserting an integer value into an array the correct position, considering the other values already in the array. Loop and recursive versions.
 
 ### 2. recursive max
 Output the biggest integer value inside and array using a recursive approach instead of loops.
 
 ### 3. rec_print
 Print all values in an array using a recursive approach instead of loops.
+
+### 4. rec_gcd
+Finds the greatest common divisor (also known as _maximal common divisor_) between two input numbers. Loop and recursive versions.
