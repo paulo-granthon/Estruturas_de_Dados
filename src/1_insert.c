@@ -1,4 +1,4 @@
-#import <stdio.h>
+#include <stdio.h>
 
 // define the array capaciry
 #define NUMBERS_LEN 50

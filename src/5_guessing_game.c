@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 /* 
  * Recursive guessing game loop. Parameters:
  * `ra`: the starting range of the number to be guessed.

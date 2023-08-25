@@ -1,4 +1,4 @@
-#import <stdio.h>
+#include <stdio.h>
 
 static int recursive_max (int v[], int n) {
     if (n == 1) return v[0];
