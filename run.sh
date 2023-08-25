@@ -2,7 +2,7 @@
 
 input_num="$1"
 
-file_to_compile="src/${input_num}_*.c"
+file_to_compile=$(find src/ -maxdepth 1 -type f -name "${input_num}_*.c")
 
 if [ -f "$file_to_compile" ]; then
     file_name=$(basename "$file_to_compile" .c)
