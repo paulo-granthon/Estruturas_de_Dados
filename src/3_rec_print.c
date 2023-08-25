@@ -1,11 +1,7 @@
 #include <stdio.h>
 
 static void print_recursive (int v[], int n) {
-    if (n == 0) {
-        printf("\n");
-        return;
-    }
-    print_recursive(v, n-1);
+    if (n > 1) print_recursive(v, n-1);
     printf("number [%d]: %d\n", n, v[n-1]);
 }
 
