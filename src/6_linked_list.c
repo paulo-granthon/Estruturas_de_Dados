@@ -15,18 +15,20 @@ typedef struct LinkedList {
     int length;
 } LinkedList;
 
-static Node* add_rec (Node* node, int value) {
-    if (node->next_node != NULL) return add_rec(node->next_node, value);
-    Node* next_node = malloc(sizeof(Node));
-    next_node->previous_node = node;
-    next_node->value = value;
-    node->next_node = next_node;
-    return next_node;
+
+Node* node_add (Node* node, int value) {
+    if (node->next_node != NULL) return node_add(node->next_node, value);
+    Node* new_node = malloc(sizeof(Node));
+    new_node->previous_node = node;
+    node->next_node = new_node;
+    new_node->next_node = NULL;
+    new_node->value = value;
+    return new_node;
 }
 
-static int add (LinkedList* linked_list, int value) {
+int linked_list_add (LinkedList* linked_list, int value) {
     if (linked_list->first_node != NULL) {
-        Node* last_node = add_rec(linked_list->first_node, value);
+        Node* last_node = node_add(linked_list->first_node, value);
         if (last_node == NULL) return 1;
         linked_list->last_node = last_node;
         linked_list->length++;
@@ -40,39 +42,40 @@ static int add (LinkedList* linked_list, int value) {
     return 0;
 }
 
-static void print_rec (Node* node) {
+void node_print (Node* node) {
     printf("%d%s", node->value, node->next_node != NULL ? ", " : "");
-    if (node->next_node != NULL) print_rec(node->next_node);
+    if (node->next_node != NULL) node_print(node->next_node);
 }
 
-static void print (LinkedList* linked_list) {
+void linked_list_print (LinkedList* linked_list) {
     printf("LinkedList {");
-    if (linked_list->first_node != NULL) print_rec(linked_list->first_node);
+    if (linked_list->first_node != NULL) node_print(linked_list->first_node);
     printf("}\n");
 }
 
-static void free_rec (Node* node) {
-    if (node->next_node != NULL) free_rec(node->next_node);
+void node_free (Node* node) {
+    if (node->next_node != NULL) node_free(node->next_node);
     free(node);
 }
 
-static void free_linked_list (LinkedList* linked_list) {
+void linked_list_free (LinkedList* linked_list) {
     if (linked_list->first_node == NULL) return;
-    free_rec(linked_list->first_node);
+    node_free(linked_list->first_node);
     free(linked_list);
 }
 
 int main () {
     LinkedList* linked_list = malloc(sizeof(LinkedList));
+    linked_list->length = 0;
 
     for (int i = 1; i < 5; i++) {
         printf("adding: %d\n", i);
-        add(linked_list, i);
+        linked_list_add(linked_list, i);
     }
 
-    print(linked_list);
+    linked_list_print(linked_list);
 
-    free_linked_list(linked_list);
+    linked_list_free(linked_list);
 
     return 0;
 
