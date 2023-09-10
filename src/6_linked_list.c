@@ -97,6 +97,14 @@ void linked_list_free (LinkedList* linked_list) {
     free(linked_list);
 }
 
+void linked_list_clear (LinkedList* linked_list) {
+    if (linked_list == NULL || linked_list->first_node == NULL) return;
+    node_free(linked_list->first_node);
+    linked_list->first_node = NULL;
+    linked_list->last_node = NULL;
+    linked_list->length = 0;
+}
+
 int main () {
     LinkedList* linked_list = linked_list_create();
 
