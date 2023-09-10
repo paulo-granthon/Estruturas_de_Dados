@@ -41,13 +41,14 @@ static int add (LinkedList* linked_list, int value) {
 }
 
 static void print_rec (Node* node) {
-    printf("print_rec: %d\n", node->value);
+    printf("%d%s", node->value, node->next_node != NULL ? ", " : "");
     if (node->next_node != NULL) print_rec(node->next_node);
 }
 
 static void print (LinkedList* linked_list) {
-    printf("LinkedList:\n");
+    printf("LinkedList {");
     if (linked_list->first_node != NULL) print_rec(linked_list->first_node);
+    printf("}\n");
 }
 
 static void free_rec (Node* node) {
