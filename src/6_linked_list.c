@@ -16,14 +16,47 @@ typedef struct LinkedList {
 } LinkedList;
 
 
-Node* node_add (Node* node, int value) {
-    if (node->next_node != NULL) return node_add(node->next_node, value);
+LinkedList* linked_list_create() {
+    LinkedList* linked_list = malloc(sizeof(LinkedList));
+    if (linked_list == NULL) {
+        perror("Failed to allocate memory for the linked list");
+        exit(EXIT_FAILURE);
+    }
+    linked_list->first_node = NULL;
+    linked_list->last_node = NULL;
+    linked_list->length = 0;
+    return linked_list;
+}
+
+Node* node_create(int value, Node* previous_node, Node* next_node) {
     Node* new_node = malloc(sizeof(Node));
-    new_node->previous_node = node;
-    node->next_node = new_node;
-    new_node->next_node = NULL;
+    if (new_node == NULL) {
+        perror("Failed to allocate memory for a new Node");
+        exit(EXIT_FAILURE);
+    }
+    new_node->next_node = next_node;
+    if (next_node != NULL) {
+        if (next_node->previous_node != NULL) {
+            perror("node_create -- Error: next_node already has a previous_node!");
+            exit(EXIT_FAILURE);
+        }
+        next_node->previous_node = new_node;
+    }
+    new_node->previous_node = previous_node;
+    if (previous_node != NULL) {
+        if (previous_node->next_node != NULL) {
+            perror("node_create -- Error: previous_node already has a next_node!");
+            exit(EXIT_FAILURE);
+        }
+        previous_node->next_node = new_node;
+    }
     new_node->value = value;
     return new_node;
+}
+
+Node* node_add (Node* node, int value) {
+    if (node->next_node != NULL) return node_add(node->next_node, value);
+    return node_create(value, node, NULL);
 }
 
 int linked_list_add (LinkedList* linked_list, int value) {
@@ -34,7 +67,7 @@ int linked_list_add (LinkedList* linked_list, int value) {
         linked_list->length++;
         return 0;
     }
-    Node* first_node = malloc(sizeof(Node));
+    Node* first_node = node_create(value, NULL, NULL);
     first_node->value = value;
     linked_list->first_node = first_node;
     linked_list->last_node = first_node;
@@ -65,8 +98,7 @@ void linked_list_free (LinkedList* linked_list) {
 }
 
 int main () {
-    LinkedList* linked_list = malloc(sizeof(LinkedList));
-    linked_list->length = 0;
+    LinkedList* linked_list = linked_list_create();
 
     for (int i = 1; i < 5; i++) {
         printf("adding: %d\n", i);
