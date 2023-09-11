@@ -5,6 +5,18 @@
 #define OK 0
 #define MALLOC_FAILURE 1
 #define OUT_OF_BOUNDS 2
+char* error_to_string (int error) {
+    switch (error) {
+        case OK: return "OK";
+        case MALLOC_FAILURE: return "MALLOC_FAILURE";
+        case OUT_OF_BOUNDS: return "OUT_OF_BOUNDS";
+        default: {
+            static char buf[32];
+            snprintf(buf, sizeof(buf), "UNKNOWN_ERROR: %d", error);
+            return buf;
+        }
+    }
+}
 
 
 typedef struct Node {
