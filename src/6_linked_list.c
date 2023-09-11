@@ -86,7 +86,6 @@ LinkedList* linked_list_create() {
 int linked_list_add (LinkedList* linked_list, int value) {
     if (linked_list->last_node != NULL) {
         Node* last_node = node_add(linked_list->last_node, value);
-        if (last_node == NULL) return 1;
         linked_list->last_node = last_node;
         linked_list->length++;
         return OK;
