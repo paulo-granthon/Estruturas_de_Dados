@@ -58,8 +58,8 @@ void node_print (Node* node) {
     if (node->next_node != NULL) node_print(node->next_node);
 }
 
-void node_free (Node* node) {
-    if (node->next_node != NULL) node_free(node->next_node);
+void node_free_recursive (Node* node) {
+    if (node->next_node != NULL) node_free_recursive(node->next_node);
     free(node);
 }
 
