@@ -4,7 +4,7 @@
 
 #define OK 0
 #define MALLOC_FAILURE 1
-#define OUT_OF_BOUNDS 2
+#define OUT_OF_BOUNDS -1
 char* error_to_string (int error) {
     switch (error) {
         case OK: return "OK";
