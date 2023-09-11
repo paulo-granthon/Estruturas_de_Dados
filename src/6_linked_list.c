@@ -2,6 +2,11 @@
 #include <stdlib.h>
 
 
+#define OK 0
+#define MALLOC_FAILURE 1
+#define OUT_OF_BOUNDS 2
+
+
 typedef struct Node {
     struct Node* next_node;
     struct Node* previous_node;
@@ -13,7 +18,7 @@ Node* node_create(int value, Node* previous_node, Node* next_node) {
     Node* new_node = malloc(sizeof(Node));
     if (new_node == NULL) {
         perror("Failed to allocate memory for a new Node");
-        exit(EXIT_FAILURE);
+        exit(MALLOC_FAILURE);
     }
 
     new_node->next_node = next_node;
@@ -32,16 +37,20 @@ Node* node_add (Node* node, int value) {
 }
 
 int node_insert_from_head(Node* node, int value, int position, int current_position) {
-    if (current_position != position - 1) return node->next_node == NULL ? 1 : node_insert_from_head(node->next_node, value, position, current_position + 1);
+    if (current_position != position - 1)
+        return node->next_node == NULL ? OUT_OF_BOUNDS
+        : node_insert_from_head(node->next_node, value, position, current_position + 1);
     printf("Inserting from head\n");
     node_create(value, node, node->next_node);
-    return 0;
+    return OK;
 }
 int node_insert_from_tail(Node* node, int value, int position, int current_position) {
-    if (current_position != position) return node->previous_node == NULL ? 1 : node_insert_from_tail(node->previous_node, value, position, current_position - 1);
+    if (current_position != position)
+        return node->previous_node == NULL ? OUT_OF_BOUNDS
+        : node_insert_from_tail(node->previous_node, value, position, current_position - 1);
     printf("Inserting from tail\n");
     node_create(value, node->previous_node, node);
-    return 0;
+    return OK;
 }
 
 void node_print (Node* node) {
@@ -66,7 +75,7 @@ LinkedList* linked_list_create() {
     LinkedList* linked_list = malloc(sizeof(LinkedList));
     if (linked_list == NULL) {
         perror("Failed to allocate memory for the linked list");
-        exit(EXIT_FAILURE);
+        exit(MALLOC_FAILURE);
     }
     linked_list->first_node = NULL;
     linked_list->last_node = NULL;
@@ -80,14 +89,14 @@ int linked_list_add (LinkedList* linked_list, int value) {
         if (last_node == NULL) return 1;
         linked_list->last_node = last_node;
         linked_list->length++;
-        return 0;
+        return OK;
     }
     Node* first_node = node_create(value, NULL, NULL);
     first_node->value = value;
     linked_list->first_node = first_node;
     linked_list->last_node = first_node;
     linked_list->length++;
-    return 0;
+    return OK;
 }
 
 int linked_list_insert (LinkedList* linked_list, int value, int position) {
@@ -95,12 +104,12 @@ int linked_list_insert (LinkedList* linked_list, int value, int position) {
 
     if (position == 0) {
         linked_list->first_node = node_create(value, NULL, linked_list->first_node);
-        return 0;
+        return OK;
     }
 
     if (position == linked_list->length) {
         linked_list->last_node = node_create(value, linked_list->last_node, NULL);
-        return 0;
+        return OK;
     }
 
     if (position > linked_list->length / 2) {
@@ -156,5 +165,5 @@ int main () {
     test_insert(10, 0, 5);
     test_insert(10, 0, 4);
 
-    return 0;
+    return OK;
 }
