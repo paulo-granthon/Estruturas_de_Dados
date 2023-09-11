@@ -70,6 +70,11 @@ void node_print (Node* node) {
     if (node->next_node != NULL) node_print(node->next_node);
 }
 
+int node_index_of (Node* node, int value, int current_position) {
+    return node->value == value ? current_position
+        : node_index_of(node->next_node, value, current_position + 1);
+}
+
 int node_remove_at_from_head(Node* node, int position, int current_position) {
     if (current_position != position)
         return node->next_node == NULL ? OUT_OF_BOUNDS
