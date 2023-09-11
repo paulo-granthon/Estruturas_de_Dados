@@ -162,6 +162,10 @@ int linked_list_index_of (LinkedList* linked_list, int value) {
         : node_index_of(linked_list->first_node, value, 0);
 }
 
+int linked_list_contains (LinkedList* linked_list, int value) {
+    return linked_list_index_of(linked_list, value) == OUT_OF_BOUNDS ? 1 : OK;
+}
+
 int linked_list_remove_at (LinkedList* linked_list, int position) {
     if (position < 0 || position >= linked_list->length) return OUT_OF_BOUNDS;
     if (position == 0) {
