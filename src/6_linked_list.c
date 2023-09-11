@@ -70,6 +70,27 @@ void node_print (Node* node) {
     if (node->next_node != NULL) node_print(node->next_node);
 }
 
+int node_remove_at_from_head(Node* node, int position, int current_position) {
+    if (current_position != position)
+        return node->next_node == NULL ? OUT_OF_BOUNDS
+        : node_remove_at_from_head(node->next_node, position, current_position + 1);
+    printf("Removing at position %d from head\n", position);
+    node->previous_node->next_node = node->next_node;
+    node->next_node->previous_node = node->previous_node;
+    free(node);
+    return OK;
+}
+int node_remove_at_from_tail(Node* node, int position, int current_position) {
+    if (current_position != position)
+        return node->previous_node == NULL ? OUT_OF_BOUNDS
+        : node_remove_at_from_tail(node->previous_node, position, current_position - 1);
+    printf("Removing at position %d from tail\n", position);
+    node->previous_node->next_node = node->next_node;
+    node->next_node->previous_node = node->previous_node;
+    free(node);
+    return OK;
+}
+
 void node_free_recursive (Node* node) {
     if (node->next_node != NULL) node_free_recursive(node->next_node);
     free(node);
