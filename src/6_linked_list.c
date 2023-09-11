@@ -111,23 +111,18 @@ int linked_list_add (LinkedList* linked_list, int value) {
 }
 
 int linked_list_insert (LinkedList* linked_list, int value, int position) {
-    if (position < 0 || position > linked_list->length) return 1;
-
+    if (position < 0 || position > linked_list->length) return OUT_OF_BOUNDS;
     if (position == 0) {
         linked_list->first_node = node_create(value, NULL, linked_list->first_node);
         return OK;
     }
-
     if (position == linked_list->length) {
         linked_list->last_node = node_create(value, linked_list->last_node, NULL);
         return OK;
     }
-
-    if (position > linked_list->length / 2) {
-        return node_insert_from_tail(linked_list->last_node, value, position, linked_list->length - 1);
-    }
-
-    return node_insert_from_head(linked_list->first_node, value, position, 0);
+    return position >= linked_list->length / 2 ?
+        node_insert_from_tail(linked_list->last_node, value, position, linked_list->length - 1)
+        : node_insert_from_head(linked_list->first_node, value, position, 0);
 }
 
 void linked_list_print (LinkedList* linked_list) {
