@@ -152,45 +152,110 @@ void linked_list_print (LinkedList* linked_list) {
     printf("}\n");
 }
 
-
-void linked_list_free (LinkedList* linked_list) {
-    if (linked_list->first_node == NULL) return;
-    node_free(linked_list->first_node);
-    free(linked_list);
+int linked_list_remove_at (LinkedList* linked_list, int position) {
+    if (position < 0 || position >= linked_list->length) return OUT_OF_BOUNDS;
+    if (position == 0) {
+        linked_list->first_node = linked_list->first_node->next_node;
+        free(linked_list->first_node->previous_node);
+        linked_list->first_node->previous_node = NULL;
+        linked_list->length--;
+        return OK;
+    }
+    if (position == linked_list->length - 1) {
+        linked_list->last_node = linked_list->last_node->previous_node;
+        free(linked_list->last_node->next_node);
+        linked_list->last_node->next_node = NULL;
+        linked_list->length--;
+        return OK;
+    }
+    int result = position >= linked_list->length / 2 ?
+        node_remove_at_from_tail(linked_list->last_node, position, linked_list->length - 1)
+        : node_remove_at_from_head(linked_list->first_node, position, 0);
+    if (result == OK) {
+        linked_list->length--;
+        return OK;
+    }
+    return result;
 }
 
 void linked_list_clear (LinkedList* linked_list) {
     if (linked_list == NULL || linked_list->first_node == NULL) return;
-    node_free(linked_list->first_node);
+    node_free_recursive(linked_list->first_node);
     linked_list->first_node = NULL;
     linked_list->last_node = NULL;
     linked_list->length = 0;
 }
 
-void test_insert (int length, int value, int position) {
-    printf("\nTESTING INSERT -- | length: %d | value: %d | position: %d\n", length, value, position);
+void linked_list_free (LinkedList* linked_list) {
+    if (linked_list->first_node == NULL) return;
+    node_free_recursive(linked_list->first_node);
+    free(linked_list);
+}
+
+
+#define OPERATION_INSERT 0
+#define OPERATION_REMOVE_AT 1
+char* operation_to_string (int operation) {
+    switch (operation) {
+        case OPERATION_INSERT: return "OPERATION_INSERT";
+        case OPERATION_REMOVE_AT: return "OPERATION_REMOVE_AT:";
+        default: {
+            static char buf[32];
+            snprintf(buf, sizeof(buf), "UNKNOWN_OPERATION: %d", operation);
+            return buf;
+        }
+    }
+}
+
+
+void test_operation (int operation, int length, int value, int position) {
+    printf(
+        "\nTESTING OPERATION %s -- | length: %d | value: %d | position: %d\n",
+        operation_to_string(operation), length, value, position
+    );
     LinkedList* linked_list = linked_list_create();
     for (int i = 1; i < length; i++) {
         linked_list_add(linked_list, i * 10);
     }
     linked_list_print(linked_list);
-    if (linked_list_insert(linked_list, value, position) != 0) {
-        printf("Error inserting value %d at position %d of linked_list with length %d. ", value, position, linked_list->length);
+    if (operation == OPERATION_INSERT) {
+        int result = linked_list_insert(linked_list, value, position);
+        if (result != 0) printf(
+            "%s Error inserting value %d at position %d of linked_list with length %d. ",
+            error_to_string(result), value, position, linked_list->length
+        );
+    }
+    if (operation == OPERATION_REMOVE_AT) {
+        int result = linked_list_remove_at(linked_list, position);
+        if (result != 0) printf(
+            "%s Error removing value at position %d of linked_list with length %d. ",
+            error_to_string(result), position, linked_list->length
+        );
     }
     linked_list_print(linked_list);
 }
 
+
 int main () {
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 0);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 1);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 2);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 3);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 4);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 5);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 6);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 7);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 8);
+    test_operation(OPERATION_REMOVE_AT, 11, 0, 9);
 
-    test_insert(5, 0, 0);
-    test_insert(5, 0, 1);
-    test_insert(5, 0, 2);
-    test_insert(5, 0, 3);
-    test_insert(5, 0, 4);
-    test_insert(5, 0, 5);
-
-    test_insert(10, 0, 5);
-    test_insert(10, 0, 4);
+    // test_operation(OPERATION_INSERT, 5, 0, 0);
+    // test_operation(OPERATION_INSERT, 5, 0, 1);
+    // test_operation(OPERATION_INSERT, 5, 0, 2);
+    // test_operation(OPERATION_INSERT, 5, 0, 3);
+    // test_operation(OPERATION_INSERT, 5, 0, 4);
+    // test_operation(OPERATION_INSERT, 5, 0, 5);
+    // test_operation(OPERATION_INSERT, 10, 0, 5);
+    // test_operation(OPERATION_INSERT, 10, 0, 4);
 
     return OK;
 }
