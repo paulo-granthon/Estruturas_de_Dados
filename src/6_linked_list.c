@@ -1,23 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
-#define OK 0
-#define MALLOC_FAILURE 1
-#define OUT_OF_BOUNDS -1
-char* error_to_string (int error) {
-    switch (error) {
-        case OK: return "OK";
-        case MALLOC_FAILURE: return "MALLOC_FAILURE";
-        case OUT_OF_BOUNDS: return "OUT_OF_BOUNDS";
-        default: {
-            static char buf[32];
-            snprintf(buf, sizeof(buf), "UNKNOWN_ERROR: %d", error);
-            return buf;
-        }
-    }
-}
-
+#include "./utils/error_codes.h"
+#include "./utils/operation_codes.h"
 
 typedef struct Node {
     struct Node* next_node;
@@ -204,21 +188,6 @@ void linked_list_free (LinkedList* linked_list) {
     if (linked_list->first_node == NULL) return;
     node_free_recursive(linked_list->first_node);
     free(linked_list);
-}
-
-
-#define OPERATION_INSERT 0
-#define OPERATION_REMOVE_AT 1
-char* operation_to_string (int operation) {
-    switch (operation) {
-        case OPERATION_INSERT: return "OPERATION_INSERT";
-        case OPERATION_REMOVE_AT: return "OPERATION_REMOVE_AT:";
-        default: {
-            static char buf[32];
-            snprintf(buf, sizeof(buf), "UNKNOWN_OPERATION: %d", operation);
-            return buf;
-        }
-    }
 }
 
 

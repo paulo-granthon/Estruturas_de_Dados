@@ -10,7 +10,10 @@ if [ -f "$file_to_compile" ]; then
         mkdir compiled
     fi
 
-    gcc -g "$file_to_compile" -o "compiled/$file_name"
+    gcc -g "$file_to_compile" \
+        ./src/utils/error_codes.c \
+        ./src/utils/operation_codes.c \
+        -o "compiled/$file_name"
     chmod u+x "compiled/$file_name"
     "./compiled/$file_name"
 else
