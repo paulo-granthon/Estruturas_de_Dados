@@ -50,15 +50,9 @@ int headless_remove (Headless** h, int i) {
 // index_of
 
 void headless_print (Headless* h) {
-    printf("%d", h->value);
-    if (h->next == NULL) {
-        printf("}\n");
-        return;
-    }
-    printf(", ");
-    headless_print(h->next);
+    printf("%d%s", h->value, h->next == NULL ? "}\n" : ", ");
+    if (h->next != NULL) headless_print(h->next);
 }
-
 
 void test_operation_proccess_result (int operation, int result, int value, int position) {
     if (result != 0) printf(
