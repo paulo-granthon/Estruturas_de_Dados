@@ -208,7 +208,7 @@ void test_operation (int operation, int length, int value, int position) {
             error_to_string(result), value, position, linked_list->length
         );
     }
-    if (operation == OPERATION_REMOVE_AT) {
+    if (operation == OPERATION_REMOVE) {
         int result = linked_list_remove_at(linked_list, position);
         if (result != 0) printf(
             "%s Error removing value at position %d of linked_list with length %d. ",
@@ -220,16 +220,16 @@ void test_operation (int operation, int length, int value, int position) {
 
 
 int main () {
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 0);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 1);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 2);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 3);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 4);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 5);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 6);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 7);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 8);
-    test_operation(OPERATION_REMOVE_AT, 11, 0, 9);
+    test_operation(OPERATION_REMOVE, 11, 0, 0);
+    test_operation(OPERATION_REMOVE, 11, 0, 1);
+    test_operation(OPERATION_REMOVE, 11, 0, 2);
+    test_operation(OPERATION_REMOVE, 11, 0, 3);
+    test_operation(OPERATION_REMOVE, 11, 0, 4);
+    test_operation(OPERATION_REMOVE, 11, 0, 5);
+    test_operation(OPERATION_REMOVE, 11, 0, 6);
+    test_operation(OPERATION_REMOVE, 11, 0, 7);
+    test_operation(OPERATION_REMOVE, 11, 0, 8);
+    test_operation(OPERATION_REMOVE, 11, 0, 9);
 
     // test_operation(OPERATION_INSERT, 5, 0, 0);
     // test_operation(OPERATION_INSERT, 5, 0, 1);
