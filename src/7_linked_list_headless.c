@@ -79,21 +79,27 @@ void test_operation (int operation, int length, int value, int position) {
     }
     printf("Headless: {");
     headless_print(*h);
-    if (operation == OPERATION_INSERT) {
-        int result = headless_insert(h, value, position);
-        if (result != 0) printf(
-            "%s Error inserting value %d at position %d. ",
-            error_to_string(result), value, position
-        );
+    switch (operation) {
+        case OPERATION_INSERT:
+            test_operation_proccess_result(operation, headless_insert(h, value, position), value, position);
+            break;
+        case OPERATION_REMOVE:
+            test_operation_proccess_result(operation, headless_remove(h, position), 0, position);
+            break;
     }
     printf("Headless: {");
     headless_print(*h);
 }
+
+
 int main () {
 
-    test_operation(0, 5, 999, 0);
-    test_operation(0, 5, 999, 1);
-    test_operation(0, 5, 999, 2);
+    test_operation(OPERATION_REMOVE, 5, 999, 0);
+    test_operation(OPERATION_REMOVE, 5, 999, 1);
+    test_operation(OPERATION_REMOVE, 5, 999, 2);
+    test_operation(OPERATION_REMOVE, 5, 999, 3);
+    test_operation(OPERATION_REMOVE, 5, 999, 4);
+    test_operation(OPERATION_REMOVE, 5, 999, 5);
 
     return OK;
 }
