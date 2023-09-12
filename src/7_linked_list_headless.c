@@ -28,15 +28,24 @@ int headless_add (Headless* h, int value) {
 }
 
 int headless_insert (Headless** h, int value, int i) {
-    if (i > 0)
-        return (*h)->next != NULL ? headless_insert(&((*h)->next), value, i - 1)
-        : headless_add(*h, value);
+    if (i > 0) return (*h)->next != NULL ? headless_insert(&((*h)->next), value, i - 1)
+        : i == 1 ? headless_add(*h, value)
+            : OUT_OF_BOUNDS;
     Headless* new_h = new_headless(value, *h);
     *h = new_h;
     return OK;
 }
 
-// remove
+int headless_remove (Headless** h, int i) {
+    if (i > 0)
+        return (*h)->next == NULL ? OUT_OF_BOUNDS
+        : headless_remove(&((*h)->next), i - 1);
+    Headless* new_h = (*h)->next;
+    free(*h);
+    *h = new_h;
+    return OK;
+}
+
 // contains
 // index_of
 
