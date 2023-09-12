@@ -60,6 +60,13 @@ void headless_print (Headless* h) {
 }
 
 
+void test_operation_proccess_result (int operation, int result, int value, int position) {
+    if (result != 0) printf(
+        "%s Error in operation %s | value: %d | position: %d. ",
+        error_to_string(result), operation_to_string(operation), value, position
+    );
+}
+
 void test_operation (int operation, int length, int value, int position) {
     printf(
         "\nTESTING OPERATION %s -- | length: %d | value: %d | position: %d\n",
