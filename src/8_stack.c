@@ -74,7 +74,7 @@ void stack_print(Stack* stack) {
         }
         printf("%d", stack->data[stack->top]);
     }
-    printf("} (+%d empty)\n", stack->capacity - 1 - stack->top);
+    printf("} (%d pushed + %d empty)\n", stack->top + 1, stack->capacity - 1 - stack->top);
 }
 
 
