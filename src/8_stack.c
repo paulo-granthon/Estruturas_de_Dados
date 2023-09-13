@@ -105,7 +105,14 @@ void test_operation (int operation, int length, int value, int repeat) {
 
 int main () {
     Stack* stack = stack_create();
-    test_operation(OPERATION_INSERT, 0, 999);
-    test_operation(OPERATION_INSERT, 15, 999);
-    test_operation(OPERATION_INSERT, 16, 999);
+    test_operation(OPERATION_INSERT, 0, 999, 0);
+    test_operation(OPERATION_INSERT, 15, 999, 0);
+    test_operation(OPERATION_INSERT, 16, 999, 0);
+    test_operation(OPERATION_INSERT, 0, 999, 15);
+
+    test_operation(OPERATION_REMOVE, 1, 0, 0);
+    test_operation(OPERATION_REMOVE, 0, 0, 0);
+    test_operation(OPERATION_REMOVE, 16, 0, 15);
+    test_operation(OPERATION_REMOVE, 32, 0, 15);
+    test_operation(OPERATION_REMOVE, 64, 0, 48);
 }
