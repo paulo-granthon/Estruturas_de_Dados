@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "./utils/error_codes.h"
+#include "./utils/operation_codes.h"
 
 #define MIN_SIZE 16
+
 
 typedef struct Stack {
     int* data;
