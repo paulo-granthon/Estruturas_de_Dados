@@ -78,7 +78,7 @@ void stack_print(Stack* stack) {
 }
 
 
-void test_operation (int operation, int length, int value) {
+void test_operation (int operation, int length, int value, int repeat) {
     printf(
         "\nTESTING OPERATION %s -- | value: %d\n",
         operation_to_string(operation), value
@@ -90,11 +90,14 @@ void test_operation (int operation, int length, int value) {
     stack_print(stack);
     switch (operation) {
         case OPERATION_INSERT:
-            stack_push(stack, value);
+            for (int i = repeat; i >= 0; i--) stack_push(stack, value);
             break;
-        case OPERATION_REMOVE:
-            printf("%d\n", stack_pop(stack));
+        case OPERATION_REMOVE: {
+            int operation_remove_result;
+            for (int i = repeat; i >= 0; i--) operation_remove_result = stack_pop(stack);
+            printf("last value popped: %d\n", operation_remove_result);
             break;
+        }
     }
     stack_print(stack);
 }
