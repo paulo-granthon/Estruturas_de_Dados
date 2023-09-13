@@ -13,7 +13,6 @@ typedef struct Stack {
 } Stack;
 
 
-// first in first out 
 Stack* stack_create () {
     Stack* stack = malloc(sizeof(Stack));
     stack->data = malloc(sizeof(int) * MIN_SIZE);
@@ -62,3 +61,13 @@ int stack_pop (Stack* stack) {
     return value;
 }
 
+void stack_print(Stack* stack) {
+    printf("Stack {");
+    if (stack->top >= 0) {
+        for (int i = 0; i < stack->top; i++) {
+            printf("%d, ", stack->data[i]);
+        }
+        printf("%d", stack->data[stack->top]);
+    }
+    printf("} (+%d empty)\n", stack->capacity - 1 - stack->top);
+}
