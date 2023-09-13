@@ -52,7 +52,11 @@ int headless_contains (Headless* h, int value) {
             : headless_contains(h->next, value);
 }
 
-// index_of
+int headless_index_of (Headless* h, int value, int i) {
+    return h->value == value ? i
+        : h->next == NULL ? OUT_OF_BOUNDS
+            : headless_index_of(h->next, value, i + 1);
+}
 
 void headless_print (Headless* h) {
     printf("%d%s", h->value, h->next == NULL ? "}\n" : ", ");
