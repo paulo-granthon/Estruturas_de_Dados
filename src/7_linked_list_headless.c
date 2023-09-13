@@ -88,6 +88,9 @@ void test_operation (int operation, int length, int value, int position) {
         case OPERATION_CONTAINS:
             headless_contains(*h, value) == 0 ? printf("YES\n") : printf("NO\n");
             return;
+        case OPERATION_INDEX_OF:
+            printf("%d\n", headless_index_of(*h, value, 0));
+            return;
     }
     printf("Headless: {");
     headless_print(*h);
@@ -96,18 +99,12 @@ void test_operation (int operation, int length, int value, int position) {
 
 int main () {
 
-    test_operation(OPERATION_CONTAINS, 5, 00, 0);
-    test_operation(OPERATION_CONTAINS, 5, 10, 0);
-    test_operation(OPERATION_CONTAINS, 5, 20, 0);
-    test_operation(OPERATION_CONTAINS, 5, 30, 0);
-    test_operation(OPERATION_CONTAINS, 5, 40, 0);
-    test_operation(OPERATION_CONTAINS, 5, 50, 0);
-
-    // test_operation(OPERATION_REMOVE, 5, 999, 0);
-    // test_operation(OPERATION_REMOVE, 5, 999, 1);
-    // test_operation(OPERATION_REMOVE, 5, 999, 2);
-    // test_operation(OPERATION_REMOVE, 5, 999, 3);
-    // test_operation(OPERATION_REMOVE, 5, 999, 4);
+    test_operation(OPERATION_INDEX_OF, 5, 00, 0);
+    test_operation(OPERATION_INDEX_OF, 5, 10, 0);
+    test_operation(OPERATION_INDEX_OF, 5, 20, 0);
+    test_operation(OPERATION_INDEX_OF, 5, 30, 0);
+    test_operation(OPERATION_INDEX_OF, 5, 40, 0);
+    test_operation(OPERATION_INDEX_OF, 5, 50, 0);
 
     return OK;
 }
