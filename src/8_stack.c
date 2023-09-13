@@ -41,7 +41,7 @@ void stack_halve (Stack* stack) {
         printf("Error resizing the stack from %d to %d capacity\n", stack->capacity, stack->capacity / 2);
         exit(MALLOC_FAILURE);
     }
-    for (int i = 0; i < stack->capacity / 2; i++) {
+    for (int i = 0; i < stack->capacity / 4; i++) {
         new_data[i] = stack->data[i];
     }
     stack->data = new_data;
@@ -55,9 +55,14 @@ void stack_push (Stack* stack, int value) {
 }
 
 int stack_pop (Stack* stack) {
+    if (stack-> top < 0) {
+        printf("OUT_OF_BOUNDS Error on stack_pop\n");
+        // exit(OUT_OF_BOUNDS);
+        return OUT_OF_BOUNDS;
+    }
     int value = stack->data[stack->top];
     stack->top--;
-    if (stack->top <= stack->capacity / 2) stack_halve(stack);
+    if (stack->capacity > MIN_SIZE && stack->top <= stack->capacity / 4) stack_halve(stack);
     return value;
 }
 
