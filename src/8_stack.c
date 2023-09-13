@@ -22,7 +22,6 @@ Stack* stack_create () {
     return stack;
 }
 
-// resize
 
 void stack_resize (Stack* stack) {
     int* new_data = malloc(sizeof(int) * stack->capacity * 2);
@@ -37,6 +36,10 @@ void stack_resize (Stack* stack) {
     stack->capacity = stack->capacity * 2;
 }
 
-// push
+void stack_push (Stack* stack, int value) {
+    if (stack->top == stack->capacity - 1) stack_resize(stack);
+    stack->top++;
+    stack->data[stack->top] = value;
+}
 
 // pop
