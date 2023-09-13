@@ -71,3 +71,33 @@ void stack_print(Stack* stack) {
     }
     printf("} (+%d empty)\n", stack->capacity - 1 - stack->top);
 }
+
+
+void test_operation (int operation, int length, int value) {
+    printf(
+        "\nTESTING OPERATION %s -- | value: %d\n",
+        operation_to_string(operation), value
+    );
+    Stack* stack = stack_create();
+    for (int i = 0; i < length; i++) {
+        stack_push(stack, (i + 1) * 10);
+    }
+    stack_print(stack);
+    switch (operation) {
+        case OPERATION_INSERT:
+            stack_push(stack, value);
+            break;
+        case OPERATION_REMOVE:
+            printf("%d\n", stack_pop(stack));
+            break;
+    }
+    stack_print(stack);
+}
+
+
+int main () {
+    Stack* stack = stack_create();
+    test_operation(OPERATION_INSERT, 0, 999);
+    test_operation(OPERATION_INSERT, 15, 999);
+    test_operation(OPERATION_INSERT, 16, 999);
+}
