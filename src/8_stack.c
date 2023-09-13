@@ -66,6 +66,18 @@ int stack_pop (Stack* stack) {
     return value;
 }
 
+int* stack_index_of (Stack* stack, int value) {
+    for (int i = 0; i < stack->top; i++) {
+        if (stack->data[i] != value) continue;
+        return &stack->data[i];
+    }
+    return NULL;
+}
+
+int stack_contains (Stack* stack, int value) {
+    return stack_index_of(stack, value) == NULL ? 1 : OK;
+}
+
 void stack_print(Stack* stack) {
     printf("Stack {");
     if (stack->top >= 0) {
