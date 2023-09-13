@@ -55,3 +55,10 @@ void stack_push (Stack* stack, int value) {
     stack->data[stack->top] = value;
 }
 
+int stack_pop (Stack* stack) {
+    int value = stack->data[stack->top];
+    stack->top--;
+    if (stack->top <= stack->capacity / 2) stack_halve(stack);
+    return value;
+}
+
