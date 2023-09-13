@@ -36,6 +36,19 @@ void stack_resize (Stack* stack) {
     stack->capacity = stack->capacity * 2;
 }
 
+void stack_halve (Stack* stack) {
+    int* new_data = malloc(sizeof(int) * stack->capacity / 2);
+    if (new_data == NULL) {
+        printf("Error resizing the stack from %d to %d capacity\n", stack->capacity, stack->capacity / 2);
+        exit(MALLOC_FAILURE);
+    }
+    for (int i = 0; i < stack->capacity / 2; i++) {
+        new_data[i] = stack->data[i];
+    }
+    stack->data = new_data;
+    stack->capacity = stack->capacity / 2;
+}
+
 void stack_push (Stack* stack, int value) {
     if (stack->top == stack->capacity - 1) stack_resize(stack);
     stack->top++;
