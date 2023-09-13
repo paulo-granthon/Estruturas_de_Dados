@@ -10,7 +10,7 @@ typedef struct Headless {
 } Headless;
 
 
-Headless* new_headless(int value, Headless* next) {
+Headless* headless_create(int value, Headless* next) {
     Headless* h = malloc(sizeof(Headless));
     if (h == NULL) {
         perror("Failed to allocate memory for a new Headless");
@@ -21,9 +21,15 @@ Headless* new_headless(int value, Headless* next) {
     return h;
 }
 
+Headless** headless_init (int value) {
+    Headless* first_cell = headless_create(10, NULL);
+    Headless** h = &first_cell;
+    return h;
+}
+
 int headless_add (Headless* h, int value) {
     if (h->next != NULL) return headless_add(h->next, value);
-    h->next = new_headless(value, NULL);
+    h->next = headless_create(value, NULL);
     return OK;
 }
 
@@ -31,7 +37,7 @@ int headless_insert (Headless** h, int value, int i) {
     if (i > 0) return (*h)->next != NULL ? headless_insert(&((*h)->next), value, i - 1)
         : i == 1 ? headless_add(*h, value)
             : OUT_OF_BOUNDS;
-    Headless* new_h = new_headless(value, *h);
+    Headless* new_h = headless_create(value, *h);
     *h = new_h;
     return OK;
 }
@@ -63,6 +69,7 @@ void headless_print (Headless* h) {
     if (h->next != NULL) headless_print(h->next);
 }
 
+
 void test_operation_proccess_result (int operation, int result, int value, int position) {
     if (result != 0) printf(
         "%s Error in operation %s | value: %d | position: %d. ",
@@ -75,8 +82,7 @@ void test_operation (int operation, int length, int value, int position) {
         "\nTESTING OPERATION %s -- | length: %d | value: %d | position: %d\n",
         operation_to_string(operation), length, value, position
     );
-    Headless* first_cell = new_headless(10, NULL);
-    Headless** h = &first_cell;
+    Headless** h = headless_init(10);
     for (int i = 2; i < length; i++) {
         headless_add(*h, i * 10);
     }
