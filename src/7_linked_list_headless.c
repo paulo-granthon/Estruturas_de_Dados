@@ -46,7 +46,12 @@ int headless_remove (Headless** h, int i) {
     return OK;
 }
 
-// contains
+int headless_contains (Headless* h, int value) {
+    return h->value == value ? OK
+        : h->next == NULL ? OUT_OF_BOUNDS
+            : headless_contains(h->next, value);
+}
+
 // index_of
 
 void headless_print (Headless* h) {
@@ -80,6 +85,9 @@ void test_operation (int operation, int length, int value, int position) {
         case OPERATION_REMOVE:
             test_operation_proccess_result(operation, headless_remove(h, position), 0, position);
             break;
+        case OPERATION_CONTAINS:
+            headless_contains(*h, value) == 0 ? printf("YES\n") : printf("NO\n");
+            return;
     }
     printf("Headless: {");
     headless_print(*h);
@@ -88,12 +96,18 @@ void test_operation (int operation, int length, int value, int position) {
 
 int main () {
 
-    test_operation(OPERATION_REMOVE, 5, 999, 0);
-    test_operation(OPERATION_REMOVE, 5, 999, 1);
-    test_operation(OPERATION_REMOVE, 5, 999, 2);
-    test_operation(OPERATION_REMOVE, 5, 999, 3);
-    test_operation(OPERATION_REMOVE, 5, 999, 4);
-    test_operation(OPERATION_REMOVE, 5, 999, 5);
+    test_operation(OPERATION_CONTAINS, 5, 00, 0);
+    test_operation(OPERATION_CONTAINS, 5, 10, 0);
+    test_operation(OPERATION_CONTAINS, 5, 20, 0);
+    test_operation(OPERATION_CONTAINS, 5, 30, 0);
+    test_operation(OPERATION_CONTAINS, 5, 40, 0);
+    test_operation(OPERATION_CONTAINS, 5, 50, 0);
+
+    // test_operation(OPERATION_REMOVE, 5, 999, 0);
+    // test_operation(OPERATION_REMOVE, 5, 999, 1);
+    // test_operation(OPERATION_REMOVE, 5, 999, 2);
+    // test_operation(OPERATION_REMOVE, 5, 999, 3);
+    // test_operation(OPERATION_REMOVE, 5, 999, 4);
 
     return OK;
 }
