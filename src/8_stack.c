@@ -23,7 +23,7 @@ Stack* stack_create () {
 }
 
 
-void stack_resize (Stack* stack) {
+void stack_double (Stack* stack) {
     int* new_data = malloc(sizeof(int) * stack->capacity * 2);
     if (new_data == NULL) {
         printf("Error resizing the stack from %d to %d capacity\n", stack->capacity, stack->capacity * 2);
@@ -50,9 +50,8 @@ void stack_halve (Stack* stack) {
 }
 
 void stack_push (Stack* stack, int value) {
-    if (stack->top == stack->capacity - 1) stack_resize(stack);
+    if (stack->top == stack->capacity - 1) stack_double(stack);
     stack->top++;
     stack->data[stack->top] = value;
 }
 
-// pop
