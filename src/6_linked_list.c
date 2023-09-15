@@ -1,13 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "6_linked_list.h"
 #include "./utils/error_codes.h"
 #include "./utils/operation_codes.h"
-
-typedef struct Node {
-    struct Node* next_node;
-    struct Node* previous_node;
-    int value;
-} Node;
 
 
 Node* node_create(int value, Node* previous_node, Node* next_node) {
@@ -84,13 +79,6 @@ void node_free_recursive (Node* node) {
     if (node->next_node != NULL) node_free_recursive(node->next_node);
     free(node);
 }
-
-
-typedef struct LinkedList {
-    struct Node* first_node;
-    struct Node* last_node;
-    int length;
-} LinkedList;
 
 
 LinkedList* linked_list_create() {
