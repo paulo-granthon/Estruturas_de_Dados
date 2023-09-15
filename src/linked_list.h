@@ -4,13 +4,11 @@ typedef struct Node {
     int value;
 } Node;
 
-
 typedef struct LinkedList {
     struct Node* first_node;
     struct Node* last_node;
     int length;
 } LinkedList;
-
 
 Node* node_create(int value, Node* previous_node, Node* next_node);
 

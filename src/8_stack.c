@@ -2,15 +2,9 @@
 #include <stdlib.h>
 #include "./utils/error_codes.h"
 #include "./utils/operation_codes.h"
+#include "stack.h"
 
 #define MIN_SIZE 16
-
-
-typedef struct Stack {
-    int* data;
-    int capacity;
-    int top;
-} Stack;
 
 
 Stack* stack_create () {

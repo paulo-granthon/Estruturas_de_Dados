@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "6_linked_list.h"
+#include "linked_list.h"
 #include "./utils/error_codes.h"
 #include "./utils/operation_codes.h"
 

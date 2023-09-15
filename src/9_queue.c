@@ -2,17 +2,9 @@
 #include <stdlib.h>
 #include "./utils/error_codes.h"
 #include "./utils/operation_codes.h"
+#include "queue.h"
 
 #define MIN_SIZE 16
-
-
-typedef struct Queue {
-    int* data;
-    int capacity;
-    int head;
-    int tail;
-} Queue;
-
 
 Queue* queue_create () {
     Queue* queue = malloc(sizeof(Queue));
@@ -119,7 +111,7 @@ void queue_debug_print (Queue* queue) {
 
 int main () {
     Queue* queue = queue_create();
-    
+
     for (int i = 0; i < 10; i++) {
         queue_push(queue, (i + 1) * 10);
     }
