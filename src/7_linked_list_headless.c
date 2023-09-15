@@ -35,14 +35,19 @@ Headless* headless_find_previous(Headless* wanted, Headless* h) {
     return h->next == wanted ? h : headless_find_previous(h->next, wanted);
 }
 
-int headless_remove (Headless** h, int i) {
-    if (i > 0)
-        return (*h)->next == NULL ? OUT_OF_BOUNDS
-        : headless_remove(&((*h)->next), i - 1);
+int headless_remove(Headless** h) {
+    if (h == NULL || *h == NULL) return OUT_OF_BOUNDS;
     Headless* new_h = (*h)->next;
     free(*h);
     *h = new_h;
     return OK;
+}
+
+int headless_remove_at (Headless* h, int i) {
+    if (i > 0)
+        return h->next == NULL ? OUT_OF_BOUNDS
+        : headless_remove_at(h->next, i - 1);
+    return headless_remove(&h);
 }
 
 int headless_index_of (Headless* h, int value, int i) {
@@ -83,7 +88,7 @@ void test_operation (int operation, int length, int value, int position) {
             test_operation_proccess_result(operation, headless_insert(&h, value, position), value, position);
             break;
         case OPERATION_REMOVE:
-            test_operation_proccess_result(operation, headless_remove(&h, position), 0, position);
+            test_operation_proccess_result(operation, headless_remove_at(&h, position), 0, position);
             break;
         case OPERATION_CONTAINS:
             headless_contains(h, value) == 0 ? printf("YES\n") : printf("NO\n");
@@ -99,12 +104,10 @@ void test_operation (int operation, int length, int value, int position) {
 
 int main () {
 
-    test_operation(OPERATION_INDEX_OF, 5, 00, 0);
-    test_operation(OPERATION_INDEX_OF, 5, 10, 0);
-    test_operation(OPERATION_INDEX_OF, 5, 20, 0);
-    test_operation(OPERATION_INDEX_OF, 5, 30, 0);
-    test_operation(OPERATION_INDEX_OF, 5, 40, 0);
-    test_operation(OPERATION_INDEX_OF, 5, 50, 0);
+    test_operation(OPERATION_REMOVE, 5, 00, 0);
+    test_operation(OPERATION_REMOVE, 5, 00, 1);
+    test_operation(OPERATION_REMOVE, 5, 10, 2);
+    test_operation(OPERATION_REMOVE, 5, 20, 3);
 
     return OK;
 }

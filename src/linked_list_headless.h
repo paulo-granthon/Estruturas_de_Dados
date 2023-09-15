@@ -10,7 +10,8 @@ int headless_insert (Headless** h, int value, int i);
 
 Headless* headless_find_previous(Headless* wanted, Headless* h);
 
-int headless_remove (Headless** h, int i);
+int headless_remove (Headless** h);
+int headless_remove_at (Headless* h, int i);
 
 int headless_index_of (Headless* h, int value, int i);
 int headless_contains (Headless* h, int value);
