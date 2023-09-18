@@ -88,7 +88,7 @@ void test_operation (int operation, int length, int value, int position) {
             test_operation_proccess_result(operation, headless_insert(&h, value, position), value, position);
             break;
         case OPERATION_REMOVE:
-            test_operation_proccess_result(operation, headless_remove_at(&h, position), 0, position);
+            test_operation_proccess_result(operation, headless_remove_at(h, position), 0, position);
             break;
         case OPERATION_CONTAINS:
             headless_contains(h, value) == 0 ? printf("YES\n") : printf("NO\n");
