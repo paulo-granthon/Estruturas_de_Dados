@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./utils/error_codes.h"
-#include "./utils/operation_codes.h"
+#include "../utils/error_codes.h"
+#include "../utils/operation_codes.h"
 #include "linked_list_headless.h"
 
 

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linked_list.h"
-#include "./utils/error_codes.h"
-#include "./utils/operation_codes.h"
+#include "../utils/error_codes.h"
+#include "../utils/operation_codes.h"
 
 
 Node* node_create(int value, Node* previous_node, Node* next_node) {

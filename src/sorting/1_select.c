@@ -1,3 +1,7 @@
+// Selection sorting algorithm
+// best case: O(n²) comparisions, O(1) swaps
+// worst case: O(n²) comparisions, O(n) swaps
+
 #include<stdio.h>
 #include<stdlib.h>
 
