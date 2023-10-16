@@ -4,7 +4,7 @@ function run_file {
     directory="$1"
     input_num="$2"
 
-    file_to_compile=$(find src/ -maxdepth 1 -type f -wholename "${directory}/${input_num}_*.c")
+    file_to_compile=$(find src/"${directory}"/ -maxdepth 1 -type f -name "${input_num}_*.c")
 
     if [ -f "$file_to_compile" ]; then
 
@@ -20,9 +20,10 @@ function run_file {
         gcc -g "$file_to_compile" \
             ./src/utils/error_codes.c \
             ./src/utils/operation_codes.c \
-            -o "compiled/$file_to_compile"
-        chmod u+x "compiled/$file_to_compile"
-        "./compiled/$file_to_compile"
+            ./src/utils/array_utils.c \
+            -o "compiled/$directory/$file_name"
+        chmod u+x "compiled/$directory/$file_name"
+        "./compiled/$directory/$file_name"
     else
         echo "Invalid or non-existent numeric input."
         echo "Please provide a number that corresponds to the first character of the name of one of the available files"
