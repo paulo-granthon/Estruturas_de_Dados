@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include "linked_list.h"
-#include "linked_list_headless.h"
-#include "stack.h"
-#include "queue.h"
+#include "./data_structures/linked_list.h"
+#include "./data_structures/linked_list_headless.h"
+#include "./data_structures/stack.h"
+#include "./data_structures/queue.h"
 
 LinkedList* linked_list = NULL;
 Headless* headless = NULL;

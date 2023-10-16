@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include"array.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "array_utils.h"
 
 int* array_create (int size) {
     int* array = malloc(sizeof(int) * size);
