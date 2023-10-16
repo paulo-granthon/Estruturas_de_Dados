@@ -2,19 +2,27 @@
 // best case: O(n²) comparisions, O(1) swaps
 // worst case: O(n²) comparisions, O(n) swaps
 
-#include"./utils/array.h"
+#include <stdio.h>
+#include "../utils/array_utils.h"
 
 void sort_select (int* array, int size) {
-    for (int i = 0; i < size; i++) {
+    for (int i = size - 1; i >= 0; i--) {
         int value_to_swap = array[0];
         int target_j = 0;
-        for (int j = 0; j < size - i + 1; j++) {
+        for (int j = 0; j < i + 1; j++) {
             if (array[j] <= value_to_swap) continue;
             value_to_swap = array[j];
             target_j = j;
         }
-        array[target_j] = array[size - i];
-        array[size - i] = value_to_swap;
+        printf("\n[%d]", i);
+        printf(
+            "swaping [%d] %d with [%d] %d\n",
+            target_j, value_to_swap,
+            i, array[i]
+        );
+        array[target_j] = array[i];
+        array[i] = value_to_swap;
+        array_print(array, size);
     }
 }
 
