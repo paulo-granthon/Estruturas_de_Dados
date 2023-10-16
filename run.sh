@@ -39,10 +39,14 @@ case "$1" in
     "m")
         run_file misc "$2"
         ;;
+    "s")
+        run_file sorting "$2"
+        ;;
     *)
         echo "Invalid or non-existent scope input. Usage:"
-        echo "$0 [d | m] [number]"
+        echo "$0 [d | s | m] [number]"
         echo "  d : The data_structure/ directory"
+        echo "  s : The sorting/ directory"
         echo "  m : The misc/ directory"
         ;;
 esac
