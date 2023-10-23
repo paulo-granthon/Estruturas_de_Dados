@@ -6,11 +6,14 @@
 #include "../utils/array_utils.h"
 
 void sort_insert (int* array, int size) {
-    for (int i = size - 1; i >= 0; i--) {
-        for (int j = size - 1 - i; j >= 0; j--) {
-            printf("%d\n", array[i]);
-        
+    for (int i = 0; i < size; i++) {
+        int value_to_swap = array[i];
+        int j = i;
+        while (j > 0  && value_to_swap < array[j - 1]) {
+            array[j] = array[j - 1];
+            --j;
         }
+        array[j] = value_to_swap;
     }
 }
 
