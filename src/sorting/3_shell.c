@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "../utils/array_utils.h"
 
-void sort_insert (int* array, int size) {
+void sort_shell (int* array, int size) {
     for (int i = 0; i < size; i++) {
         int value_to_swap = array[i];
         int j = i;
@@ -21,7 +21,7 @@ int main () {
     int* array = array_create(10);
     array_print(array, 10);
 
-    sort_insert(array, 10);
+    sort_shell(array, 10);
 
     array_print(array, 10);
 }
