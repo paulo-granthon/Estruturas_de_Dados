@@ -17,3 +17,19 @@ void array_print(int* array, int size) {
     }
     printf("}\n");
 }
+
+void array_print_slice(int* array, int start, int end) {
+    printf("array {%d", array[start]);
+    for (int i = 1; i < end; i++) {
+        printf(", %d", array[i]);
+    }
+    printf("}\n");
+}
+
+int* array_copy (int* array, int size) {
+    int* copy = malloc(sizeof(int) * size);
+    for (int i = 0; i < size; i++) {
+        copy[i] = array[i];
+    }
+    return copy;
+}
