@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include "../utils/error_codes.h"
 #include "../utils/operation_codes.h"
-#include "linked_list_headless.h"
+#include "linked_list_headless_generic.h"
 
+DECLARE_HEADLESS_TYPE(Headless, int);
 
 Headless* headless_create(int value, Headless* next) {
     Headless* h = malloc(sizeof(Headless));
