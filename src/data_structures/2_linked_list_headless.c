@@ -104,6 +104,11 @@ void test_operation (int operation, int length, int value, int position) {
 
 int main () {
 
+    test_operation(OPERATION_INSERT, 5, 00, 0);
+    test_operation(OPERATION_INSERT, 5, 00, 1);
+    test_operation(OPERATION_INSERT, 5, 10, 2);
+    test_operation(OPERATION_INSERT, 5, 20, 3);
+
     test_operation(OPERATION_REMOVE, 5, 00, 0);
     test_operation(OPERATION_REMOVE, 5, 00, 1);
     test_operation(OPERATION_REMOVE, 5, 10, 2);
