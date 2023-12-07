@@ -206,27 +206,26 @@ void test_operation (int operation, int length, int value, int position) {
     linked_list_print(linked_list);
 }
 
-
-int main () {
-    test_operation(OPERATION_REMOVE, 11, 0, 0);
-    test_operation(OPERATION_REMOVE, 11, 0, 1);
-    test_operation(OPERATION_REMOVE, 11, 0, 2);
-    test_operation(OPERATION_REMOVE, 11, 0, 3);
-    test_operation(OPERATION_REMOVE, 11, 0, 4);
-    test_operation(OPERATION_REMOVE, 11, 0, 5);
-    test_operation(OPERATION_REMOVE, 11, 0, 6);
-    test_operation(OPERATION_REMOVE, 11, 0, 7);
-    test_operation(OPERATION_REMOVE, 11, 0, 8);
-    test_operation(OPERATION_REMOVE, 11, 0, 9);
-
-    // test_operation(OPERATION_INSERT, 5, 0, 0);
-    // test_operation(OPERATION_INSERT, 5, 0, 1);
-    // test_operation(OPERATION_INSERT, 5, 0, 2);
-    // test_operation(OPERATION_INSERT, 5, 0, 3);
-    // test_operation(OPERATION_INSERT, 5, 0, 4);
-    // test_operation(OPERATION_INSERT, 5, 0, 5);
-    // test_operation(OPERATION_INSERT, 10, 0, 5);
-    // test_operation(OPERATION_INSERT, 10, 0, 4);
-
-    return OK;
-}
+// int main () {
+//     test_operation(OPERATION_REMOVE, 11, 0, 0);
+//     test_operation(OPERATION_REMOVE, 11, 0, 1);
+//     test_operation(OPERATION_REMOVE, 11, 0, 2);
+//     test_operation(OPERATION_REMOVE, 11, 0, 3);
+//     test_operation(OPERATION_REMOVE, 11, 0, 4);
+//     test_operation(OPERATION_REMOVE, 11, 0, 5);
+//     test_operation(OPERATION_REMOVE, 11, 0, 6);
+//     test_operation(OPERATION_REMOVE, 11, 0, 7);
+//     test_operation(OPERATION_REMOVE, 11, 0, 8);
+//     test_operation(OPERATION_REMOVE, 11, 0, 9);
+//
+//     // test_operation(OPERATION_INSERT, 5, 0, 0);
+//     // test_operation(OPERATION_INSERT, 5, 0, 1);
+//     // test_operation(OPERATION_INSERT, 5, 0, 2);
+//     // test_operation(OPERATION_INSERT, 5, 0, 3);
+//     // test_operation(OPERATION_INSERT, 5, 0, 4);
+//     // test_operation(OPERATION_INSERT, 5, 0, 5);
+//     // test_operation(OPERATION_INSERT, 10, 0, 5);
+//     // test_operation(OPERATION_INSERT, 10, 0, 4);
+//
+//     return OK;
+// }

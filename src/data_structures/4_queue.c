@@ -108,28 +108,27 @@ void queue_debug_print (Queue* queue) {
     }
 }
 
-
-int main () {
-    Queue* queue = queue_create();
-
-    for (int i = 0; i < 10; i++) {
-        queue_push(queue, (i + 1) * 10);
-    }
-
-    // queue_debug_print(queue);
-    // printf("pop: %d", queue_pop(queue)); printf("head: %d | tail: %d\n", queue->head, queue->tail);
-    // queue_debug_print(queue);
-    // printf("pop: %d", queue_pop(queue)); printf("head: %d | tail: %d\n", queue->head, queue->tail);
-    // queue_debug_print(queue);
-
-    // test_operation(OPERATION_INSERT, 0, 999, 0);
-    // test_operation(OPERATION_INSERT, 15, 999, 0);
-    // test_operation(OPERATION_INSERT, 16, 999, 0);
-    // test_operation(OPERATION_INSERT, 0, 999, 15);
-
-    test_operation(OPERATION_REMOVE, 1, 0, 0);
-    test_operation(OPERATION_REMOVE, 0, 0, 0);
-    test_operation(OPERATION_REMOVE, 16, 0, 15);
-    test_operation(OPERATION_REMOVE, 32, 0, 15);
-    test_operation(OPERATION_REMOVE, 64, 0, 48);
-}
+// int main () {
+//     Queue* queue = queue_create();
+//
+//     for (int i = 0; i < 10; i++) {
+//         queue_push(queue, (i + 1) * 10);
+//     }
+//
+//     // queue_debug_print(queue);
+//     // printf("pop: %d", queue_pop(queue)); printf("head: %d | tail: %d\n", queue->head, queue->tail);
+//     // queue_debug_print(queue);
+//     // printf("pop: %d", queue_pop(queue)); printf("head: %d | tail: %d\n", queue->head, queue->tail);
+//     // queue_debug_print(queue);
+//
+//     // test_operation(OPERATION_INSERT, 0, 999, 0);
+//     // test_operation(OPERATION_INSERT, 15, 999, 0);
+//     // test_operation(OPERATION_INSERT, 16, 999, 0);
+//     // test_operation(OPERATION_INSERT, 0, 999, 15);
+//
+//     test_operation(OPERATION_REMOVE, 1, 0, 0);
+//     test_operation(OPERATION_REMOVE, 0, 0, 0);
+//     test_operation(OPERATION_REMOVE, 16, 0, 15);
+//     test_operation(OPERATION_REMOVE, 32, 0, 15);
+//     test_operation(OPERATION_REMOVE, 64, 0, 48);
+// }
