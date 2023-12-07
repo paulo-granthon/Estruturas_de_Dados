@@ -1,8 +1,3 @@
-#ifndef MAIN
-#define MAIN
-#define LOCAL_MAIN
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "../utils/error_codes.h"
@@ -49,8 +44,6 @@ int btree_print (BinaryTree* root, int indent, char dir) {
     return indent + left_indent + 1;
 }
 
-#ifdef LOCAL_MAIN
-
 int main() {
 
     HeadlessLinkedQueue* output = HeadlessLinkedQueue_create(queue_create(), NULL);
@@ -67,5 +60,3 @@ int main() {
 
     btree_print(root, 0, '-');
 }
-
-#endif
