@@ -14,15 +14,8 @@ void sort_select (int* array, int size) {
             value_to_swap = array[j];
             target_j = j;
         }
-        // printf("\n[%d]", i);
-        // printf(
-        //     "swaping [%d] %d with [%d] %d\n",
-        //     target_j, value_to_swap,
-        //     i, array[i]
-        // );
         array[target_j] = array[i];
         array[i] = value_to_swap;
-        // array_print(array, size);
     }
 }
 
