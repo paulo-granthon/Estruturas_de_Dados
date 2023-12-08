@@ -3,11 +3,6 @@
 #include "../utils/error_codes.h"
 #include "../utils/operation_codes.h"
 #include "tree.h"
-#include "linked_list_headless_generic.m"
-#include "./4_queue.c"
-
-DECLARE_HEADLESS_TYPE(HeadlessLinkedQueue, Queue*);
-IMPLEMENT_HEADLESS_FUNCTIONS(HeadlessLinkedQueue, Queue*);
 
 
 BinaryTree* btree_create (int value) {
@@ -17,18 +12,53 @@ BinaryTree* btree_create (int value) {
     return node;
 }
 
-BinaryTree* btree_insert (BinaryTree* root, int value) {
-    if (root == NULL) return btree_create(value);
+BinaryTree* btree_insert (BinaryTree* btree, int value) {
+    if (btree == NULL) return btree_create(value);
 
-    if (value < root->value) {
-        root->left = btree_insert(root->left, value);
+    if (value < btree->value) {
+        btree->left = btree_insert(btree->left, value);
 
-    } else if (value > root->value) {
-        root->right = btree_insert(root->right, value);
+    } else if (value >= btree->value) {
+        btree->right = btree_insert(btree->right, value);
     }
 
-    return root;
+    return btree;
 }
+
+BinaryTree* btree_remove (BinaryTree* btree) {
+    if (btree == NULL) return NULL;
+
+    if (btree->left == NULL) {
+        BinaryTree* new_root = btree->right;
+        free(btree);
+        return new_root;
+    }
+
+    if (btree->right == NULL) {
+        BinaryTree* new_root = btree->left;
+        free(btree);
+        return new_root;
+    }
+
+    BinaryTree* smallest_right_parent = btree;
+    BinaryTree* smallest_right = btree->right;
+
+    while (smallest_right->left != NULL) {
+        smallest_right_parent = smallest_right;
+        smallest_right = smallest_right->left;
+    }
+
+    if (smallest_right_parent != btree) {
+        smallest_right_parent->left = smallest_right->right;
+        smallest_right->right = btree->right;
+    }
+
+    smallest_right->left = btree->left;
+
+    free(btree);
+    return smallest_right;
+}
+
 
 int btree_print (BinaryTree* root, int indent, char dir) {
     if (root == NULL) return 0;
@@ -45,18 +75,53 @@ int btree_print (BinaryTree* root, int indent, char dir) {
 }
 
 int main() {
+    BinaryTree* btree = NULL;
 
-    HeadlessLinkedQueue* output = HeadlessLinkedQueue_create(queue_create(), NULL);
+    btree = btree_insert(btree, 50);
+    printf("\nInitial Insert:\n"); btree_print(btree, 0, '-');
 
-    BinaryTree* root = NULL;
+    btree_insert(btree, 30);
+    printf("\nAfter Insert:\n"); btree_print(btree, 0, '-');
 
-    root = btree_insert(root, 50);
-    btree_insert(root, 30);
-    btree_insert(root, 20);
-    btree_insert(root, 40);
-    btree_insert(root, 70);
-    btree_insert(root, 60);
-    btree_insert(root, 80);
+    btree_insert(btree, 20);
+    printf("\nAfter Insert:\n"); btree_print(btree, 0, '-');
 
-    btree_print(root, 0, '-');
+    btree_insert(btree, 40);
+    printf("\nAfter Insert:\n"); btree_print(btree, 0, '-');
+
+    btree_insert(btree, 70);
+    printf("\nAfter Insert:\n"); btree_print(btree, 0, '-');
+
+    btree_insert(btree, 60);
+    printf("\nAfter Insert:\n"); btree_print(btree, 0, '-');
+
+    btree_insert(btree, 80);
+    printf("\nAfter Insert:\n"); btree_print(btree, 0, '-');
+
+    // BinaryTreeVisualization* btree_visualization = BinaryTreeVisualization_create(
+    //     VisualizationLayer_create("", NULL),
+    //     NULL
+    // );
+
+    // btree_prepare_visualization(btree, btree_visualization, 0, 1);
+
+    // btree_structured_print(btree_visualization);
+
+    btree = btree_remove(btree);
+    printf("\nAfter Remove:\n"); btree_print(btree, 0, '-');
+
+    btree = btree_remove(btree);
+    printf("\nAfter Remove:\n"); btree_print(btree, 0, '-');
+
+    btree = btree_remove(btree);
+    printf("\nAfter Remove:\n"); btree_print(btree, 0, '-');
+
+    btree = btree_remove(btree);
+    printf("\nAfter Remove:\n"); btree_print(btree, 0, '-');
+
+    btree = btree_remove(btree);
+    printf("\nAfter Remove:\n"); btree_print(btree, 0, '-');
+
+    btree = btree_remove(btree);
+    printf("\nAfter Remove:\n"); btree_print(btree, 0, '-');
 }
