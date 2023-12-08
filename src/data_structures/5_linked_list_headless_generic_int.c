@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include "../utils/error_codes.h"
 #include "../utils/operation_codes.h"
-#include "linked_list_headless_generic.m"
+#include "linked_list_headless_generic.c"
 
 DECLARE_HEADLESS_TYPE(Headless, int);
 IMPLEMENT_HEADLESS_FUNCTIONS(Headless, int);
+IMPLEMENT_HEADLESS_PRINT(Headless, int);
 
 void test_operation_proccess_result (int operation, int result, int value, int position) {
     if (result != 0) printf(
